@@ -1,6 +1,6 @@
 let img
 function preload(){
- img = loadImage("mush.jpg")
+ img = loadImage("assets/mush.jpg")
   pixelDensity(1);
 }
 
