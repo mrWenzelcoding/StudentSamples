@@ -1,8 +1,5 @@
-x=1;
-
 function setup() {
   createCanvas(600, 400);
-  frameRate(70);
 }
 
 function draw() {
@@ -11,13 +8,13 @@ function draw() {
   fill("MediumVioletRed")
   rect(0,130,600,100)
   fill("Salmon")
-  ellipse(x,180,140,125)
+  ellipse(300,180,140,125)
   fill("MidnightBlue")
   rect(0,230,600,400)
   fill("MediumVioletRed")
-  rect(0,180,600,15)
-  rect(0,203,600,8)
-  rect(0,220,600,5)
+  rect(225,180,150,15)
+  rect(225,203,150,8)
+  rect(225,220,150,5)
   fill("midnightBlue")
   triangle(180,230,10,230,90,120)
   triangle(30,230,-80,230,-20,140)
@@ -59,12 +56,5 @@ function draw() {
   stroke("midnightBlue")
   strokeWeight(4)
   line(0,230,600,230)
-  x=290
-  if(x<310){
-    x+=1;
-  }
-  else{
-    x=290;
-  }
   
 }
