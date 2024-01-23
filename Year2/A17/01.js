@@ -29,8 +29,8 @@ function setup() {
   bozo2 = new Bozo(int(random(800, 1200)), 0, int(random(100, 180)), 0);
   
   
-  spike = loadImage('Spikes.png');
-  belt = loadImage('Belt.gif');
+  spike = loadImage('assets/Spikes.png');
+  belt = loadImage('assets/Belt.gif');
   
 }
 
