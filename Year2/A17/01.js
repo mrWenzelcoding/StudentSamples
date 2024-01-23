@@ -23,14 +23,17 @@ let bozo, bozo2;
 
 let spike, belt = [];
 
+function preload(){
+  
+  spike = loadImage('assets/Spikes.png');
+  belt = loadImage('assets/Belt.gif');
+
+}
+
 function setup() {
   createCanvas(700, 400);
   bozo = new Bozo(int(random(800, 1200)), 325, 50, 0);
   bozo2 = new Bozo(int(random(800, 1200)), 0, int(random(100, 180)), 0);
-  
-  
-  spike = loadImage('assets/Spikes.png');
-  belt = loadImage('assets/Belt.gif');
   
 }
 
