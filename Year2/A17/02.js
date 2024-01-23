@@ -19,8 +19,8 @@ let skyr,skyg,skyb;
 let lose;
 
 function preload(){
-  saw = loadImage("grinder.png")
-  lose = loadImage("youlose.png")
+  saw = loadImage("assets/grinder.png")
+  lose = loadImage("assets/youlose.png")
 }
 
 function setup() {
