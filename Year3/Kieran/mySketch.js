@@ -681,7 +681,7 @@ function potDrops() {
 			heart[i].remove();
 		}
 		//HEALMAN
-		console.log(healman[i].deathtimer)
+
 		if(pot[i].ani.name == 'Shatter' && i == dropCount/2) {
 		healman[i].x = pot[i].x
 		healman[i].y = pot[i].y
@@ -708,7 +708,6 @@ function potDrops() {
 			critterImg = 'critter_empty.png'
 		}
 	}
-	console.log(critterImg)
 }
 
 //BULLET FIRING
