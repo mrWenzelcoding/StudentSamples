@@ -52,13 +52,13 @@ let setting = 'ice.png';
 function preload() {
 	//loading all assets before game starts
 	
-	floorImg = loadImage('floor_' + setting);
-	wallImg = loadImage('wall_' + setting);
-	holeImg = loadImage('void_' + setting);
-	bulletImg = loadImage('bullet.png');
-	targetImg = loadImage('target.png');
+	floorImg = loadImage('assets/floor_' + setting);
+	wallImg = loadImage('assets/wall_' + setting);
+	holeImg = loadImage('assets/void_' + setting);
+	bulletImg = loadImage('assets/bullet.png');
+	targetImg = loadImage('assets/target.png');
 	
-	gameoverImg = loadImage('yadead.png');
+	gameoverImg = loadImage('assets/yadead.png');
 	
 	//MAP PARTS
 	
@@ -146,8 +146,8 @@ function preload() {
 		//Delete the tile used so it can't be used again
 		freeTile.splice(usedTile,1)
 		pot[i].health = 1;
-		pot[i].addAni('Still','pot_' + setting,{frameSize: [16], frames:1});
-		pot[i].addAni('Shatter','pot_broke_' + setting, {frameSize: [16], frames:3, frameDelay:8});
+		pot[i].addAni('Still','assets/pot_' + setting,{frameSize: [16], frames:1});
+		pot[i].addAni('Shatter','assets/pot_broke_' + setting, {frameSize: [16], frames:3, frameDelay:8});
 		pot[i].ani = 'Still';
 	}
 	pot.collider = 'static';
@@ -162,7 +162,7 @@ function preload() {
 			ammobox.collider = 'none';
 			ammobox[j].x = -24
 			ammobox[j].y = -40
-			ammobox[j].addAni('ammobox','ammobox.png', {frameSize: [16], frames:2, frameDelay: 8});
+			ammobox[j].addAni('ammobox','assets/ammobox.png', {frameSize: [16], frames:2, frameDelay: 8});
 			ammobox[j].ani = 'ammobox';
 		}
 		heart = new Group();
@@ -173,7 +173,7 @@ function preload() {
 			heart.collider = 'none';
 			heart[j].x = -24
 			heart[j].y = -24
-			heart[j].addAni('heart','heart.png', {frameSize: [16], frames:2, frameDelay: 8});
+			heart[j].addAni('heart','assets/heart.png', {frameSize: [16], frames:2, frameDelay: 8});
 			heart[j].ani = 'heart';
 		}
 		healman = new Group();
@@ -184,7 +184,7 @@ function preload() {
 			healman.collider = 'none';
 			healman[j].x = -24
 			healman[j].y = -56
-			healman[j].addAni('healman','healman.png', {frameSize: [16], frames:4, frameDelay: 8});
+			healman[j].addAni('healman','assets/healman.png', {frameSize: [16], frames:4, frameDelay: 8});
 			healman[j].ani = 'healman';
 			healman[j].deathtimer = 0;
 			healman[j].healtimer = 0;
@@ -203,8 +203,8 @@ function preload() {
 		enemy[i].y = tilesGroup[freeTile[usedTile]].y
 		freeTile.splice(usedTile,1)
 		enemy[i].health = 3;
-		enemy[i].addAni('Move','skrawler.png', {frameSize: [16], frames:2, frameDelay:12});
-		enemy[i].addAni('Death','death.png', {frameSize:[16], frames:2, frameDelay:8});
+		enemy[i].addAni('Move','assets/skrawler.png', {frameSize: [16], frames:2, frameDelay:12});
+		enemy[i].addAni('Death','assets/death.png', {frameSize:[16], frames:2, frameDelay:8});
 		enemy[i].ani = 'Move';
 		enemy[i].deathtimer = 0;
 	}
@@ -219,8 +219,8 @@ function preload() {
 		coral[i].y = tilesGroup[freeTile[usedTile]].y
 		freeTile.splice(usedTile,1)
 		coral[i].health = 5;
-		coral[i].addAni('Coral','coraltrap.png', {frameSize: [16], frames:2, frameDelay:12});
-		coral[i].addAni('Death','death.png', {frameSize:[16], frames:2, frameDelay:8});
+		coral[i].addAni('Coral','assets/coraltrap.png', {frameSize: [16], frames:2, frameDelay:12});
+		coral[i].addAni('Death','assets/death.png', {frameSize:[16], frames:2, frameDelay:8});
 		coral[i].ani = 'Coral';
 		coral[i].deathtimer = 0;
 	}
@@ -229,18 +229,18 @@ function preload() {
 	//PLAYER
 	player = new Sprite(192,192,32,32);
 	player.collider = 'dynamic';
-	player.addAni('WalkDown','frayman_f.png', {frameSize: [32], frames:4, frameDelay:8});
-	player.addAni('IdleDown','frayman_f.png', {frameSize: [32], frames:1});
-	player.addAni('ShootDown','frayman_gun_d.png', {frameSize: [32], frames:2, frameDelay:4});
-	player.addAni('SwingDown','frayman_sw_d.png', {frameSize: [32], frames: 3, frameDelay:4});
-	player.addAni('WalkUp','frayman_b.png', {frameSize: [32], frames:4, frameDelay:8});
-	player.addAni('IdleUp','frayman_b.png', {frameSize: [32], frames:1});
-	player.addAni('ShootUp','frayman_gun_u.png', {frameSize: [32], frames:2, frameDelay:4});
-	player.addAni('SwingUp','frayman_sw_u.png', {frameSize: [32], frames: 3, frameDelay:4});
-	player.addAni('WalkSide','frayman_s.png', {frameSize: [32], frames:4, frameDelay:8});
-	player.addAni('IdleSide','frayman_s.png', {frameSize: [32], frames:1});
-	player.addAni('ShootSide','frayman_gun_s.png', {frameSize: [32], frames:2, frameDelay:4});
-	player.addAni('SwingSide','frayman_sw_s.png', {frameSize: [32], frames: 3, frameDelay:4});
+	player.addAni('WalkDown','assets/frayman_f.png', {frameSize: [32], frames:4, frameDelay:8});
+	player.addAni('IdleDown','assets/frayman_f.png', {frameSize: [32], frames:1});
+	player.addAni('ShootDown','assets/frayman_gun_d.png', {frameSize: [32], frames:2, frameDelay:4});
+	player.addAni('SwingDown','assets/frayman_sw_d.png', {frameSize: [32], frames: 3, frameDelay:4});
+	player.addAni('WalkUp','assets/frayman_b.png', {frameSize: [32], frames:4, frameDelay:8});
+	player.addAni('IdleUp','assets/frayman_b.png', {frameSize: [32], frames:1});
+	player.addAni('ShootUp','assets/frayman_gun_u.png', {frameSize: [32], frames:2, frameDelay:4});
+	player.addAni('SwingUp','assets/frayman_sw_u.png', {frameSize: [32], frames: 3, frameDelay:4});
+	player.addAni('WalkSide','assets/frayman_s.png', {frameSize: [32], frames:4, frameDelay:8});
+	player.addAni('IdleSide','assets/frayman_s.png', {frameSize: [32], frames:1});
+	player.addAni('ShootSide','assets/frayman_gun_s.png', {frameSize: [32], frames:2, frameDelay:4});
+	player.addAni('SwingSide','assets/frayman_sw_s.png', {frameSize: [32], frames: 3, frameDelay:4});
 	player.ani = 'IdleDown';
 	
 	//BULLET
@@ -271,13 +271,13 @@ function preload() {
 	keyicon.collider = 'none';
 	keyicon.w = 16;
 	keyicon.h = 16;
-	keyicon.addAni('key','key.png', {frameSize: [16], frames: 4, frameDelay:12});
+	keyicon.addAni('key','assets/key.png', {frameSize: [16], frames: 4, frameDelay:12});
 	
 	coinicon = new Sprite(16,248,0,0)
 	coinicon.collider = 'none';
 	coinicon.w = 16;
 	coinicon.h = 16;
-	coinicon.addAni('fraycoin','fraycoin.png', {frameSize: [16], frames: 4, frameDelay:12});
+	coinicon.addAni('fraycoin','assets/fraycoin.png', {frameSize: [16], frames: 4, frameDelay:12});
 	
 	ammoCount = new Sprite(336,10,0,0);
 	ammoCount.collider = 'none';
