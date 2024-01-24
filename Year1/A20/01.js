@@ -1,63 +1,42 @@
 let song;
-let fft;
-let waves;
-let x = []
-let y = []
-let s = [] 
-let x2 = []
-let y2 = []
-let p = []
-let xoff = []
-
+let img
+let waves = []
 function preload(){
-  song = loadSound("him.mp3")
+  song = loadSound('assets/BestTime.mp3')
+  img = loadImage('assets/wallpaper.jpg')
 }
-
 function setup() {
-  createCanvas(windowWidth,windowHeight);
-  noStroke()
-  song.loop()
+  imageMode(CENTER)
+  rectMode(CENTER)
+  createCanvas(windowWidth, windowHeight);
+  
+  song.play()
   fft = new p5.FFT()
-  fft.setInput(song)
-  for(let i = 0; i < 800; i ++){
-    x[i] = width/2
-    y[i] = height/2
-    x2[i] = random(0,width)
-    y2[i] = random(0,height)
-    p[i] = random(1,3)
-    xoff[i] = random(0,100)
-     while(dist(width/2,height/2,x2[i],y2[i])<200){
-    x2[i] = random(0,width)
-    y2[i] = random(0,height)
-  }
-  }
+  fft.setInput(song) 
 }
 
 function draw() {
-  background(0);
-  waves = fft.analyze();
-     for(let i = 0; i < 200; i++){
-     fill(255,200)
-    circle(x2[i],y2[i],waves[i]/10)
-        x2[i] = (1.3-1.7*noise(xoff[i]))*width
-    xoff[i]+=0.001
-       y2[i]+=p[i]
-       if(y2[i]>height){
-      y2[i]=0
-     x2[i] = (1.3-1.7*noise(xoff[i]))*width
-    xoff[i]+=0.001
-       }
-     }
-  for(let i = 0; i < 800; i++){
-    fill('green')
-    circle(width/2,height/2,waves[i])
-   }
+  //background(0);
+    image(img, width/2, height/2,width,0.56*width)
+  waves = fft.analyze()
+  loadPixels()
+
+for(let i = 0; i < pixels.length; i +=4){
+  if(pixels[i] > 220 && pixels[i+1] > 100 && pixels[i+1] < 255 && pixels[i+2] < 100 ) {
+      pixels[i] = waves[0]
+
+  } else if(pixels[i] > 100 && pixels[i+1] > 0 && pixels[i+2] < 150 ){
+  pixels[i] = waves[500]
   
-  for(let i = 0; i < 800; i ++){
-    fill('white')
-    ellipse(i*2,height,2,-1*waves[i]*2) 
-  }
+}else if(pixels[i] < 30 ){
+
+  pixels[i+2]=2*waves[350]
 }
+}
+updatePixels();
+
+}
+
 function mousePressed(){
   if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
     let fs = fullscreen();
@@ -67,3 +46,4 @@ function mousePressed(){
 function windowResized(){
   resizeCanvas(windowWidth,windowHeight);
 }
+  
