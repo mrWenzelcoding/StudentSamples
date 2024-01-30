@@ -10,7 +10,7 @@ function setup() {
   rectMode(CENTER)
   createCanvas(windowWidth, windowHeight);
   
-  song.play()
+  song.pause()
   fft = new p5.FFT()
   fft.setInput(song) 
 }
@@ -38,6 +38,11 @@ updatePixels();
 }
 
 function mousePressed(){
+  if(song.isPlaying()==true){
+    song.pause()
+  } else{
+    song.play()
+  }
   if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
     let fs = fullscreen();
     fullscreen(!fs);
