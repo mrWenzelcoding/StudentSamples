@@ -1015,9 +1015,9 @@ if(i == 8){
 	fill('light grey')
 	text('C to change camera',500,800)
 }
-	if(player1.overlapping(door) && nxt == true || player2.overlapping(door) && nxt == true || kb.presses('o') || rst == true || kb.presses('p')){
+	if(player1.overlapping(door) && nxt == true || player2.overlapping(door) && nxt == true || kb.presses('o') || rst == true){
 		
-		if( rst != true && nxt == true || kb.presses('p')){
+		if( rst != true && nxt == true){
 			i++
 	mapCurrent.removeAll()
 	player1.x = 150
@@ -1221,5 +1221,4 @@ portalo.layer = 0
 		}
 	
 player1.layer = box.layer +1
-console.log(i)
 	}
