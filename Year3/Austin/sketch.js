@@ -1,5 +1,5 @@
 /*wasd to move P1, Arrows to move P2
-Shift for P2 to control box F for P1, stand next to it to control Up & Down, Left & Right can be controlled anywhere
+Shift for P2 to lift box F for P1, stand next to it to control Up & Down, Left & Right can be controlled anywhere
 E to interact as P1, . to interact as P2
 */
 let player1,player2;
@@ -18,18 +18,28 @@ let a = [];
 let i = 0;
 let x = 0;
 let run1,fall1,idle1,run2,fall2,idle2,pulse1,pulse2,block,icev1 = 30,icev2 = 30,rst = false, cam = true, sign;
-let music, buttonRD,buttonRU,buttonBD,buttonBU,levL,levR;
+let music, buttonRD,buttonRU,buttonBD,buttonBU,levL,levR,help,back, doorOpen, doorClose, end;
 
 function preload(){
 	music = loadSound('assets/Untitled video - Made with Clipchamp (1).mp3')
-
+    doorClose  = loadImage('assets/Door1.png')
+    doorOpen = loadImage('assets/DoorOpen.png')
+	back = loadImage('assets/SpaceBack.png')
+	end = loadImage('assets/THE END.png')
 	floor = new Group()
 	floor.collider  = 's'
 	floor.w = 50
 	floor.h = 50
 	floor.tile = '='
-	floor.color = 'gray'
+	floor.image = loadImage('assets/TILEdarker-export.png')
 	floor.friction = 6
+
+	help = new Group()
+	help.collider = 'n'
+	help.w = 50
+    help.h = 50
+	help.tile = 'h'
+	help.image = loadImage('assets/HelpTile.png')
 
 	pressure = new Group()
 	pressure.collider = 'n'
@@ -43,14 +53,14 @@ function preload(){
 	ladder.w = 50
 	ladder.h = 50
 	ladder.tile = 'l'
-	ladder.color = color(77,38,0)
+	ladder.image = loadImage('assets/ladderithink.png') 
 
 	door = new Group()
 	door.collider = 'n'
 	door.w = 50
 	door.h = 50
 	door.tile = 'd'
-	door.color = 'pink'
+	door.image = doorClose
 
 	grav = new Group()
 	grav.collider = 'n'
@@ -105,7 +115,7 @@ function preload(){
 	a =[
 		[
 		'=============================================',
-		'=                                           =',
+		'=h                                          =',
 		'=                                           =',
 		'=                                           =',
 		'=                                           =',
@@ -123,12 +133,12 @@ function preload(){
 		'=                                           =',
 		'=                                           =',
 		'=                                           =',
-		'=                                          d=',
+		'=                                           =',
 		'=                        p       p         d=',
 		'=============================================',],
 
 	  [	'=============================================',
-	    '=                                           =',
+	    '=h                                          =',
 	    '=                                           =',
 	    '=                                           =',
 	    '=                                           =',
@@ -136,7 +146,7 @@ function preload(){
 		'=                                           =',
 		'=                                           =',
 		'=                                           =',
-		'=======                                    d=',
+		'=======                                     =',
 		'=                                     p    d=',
 		'=                                 l==========',
 		'=                                           =',
@@ -151,10 +161,10 @@ function preload(){
 		'=============================================',],
 
 	  ['=============================================',
+	   '=h                                          =',
 	   '=                                           =',
 	   '=                                           =',
 	   '=                                           =',
-	   '=                                          d=',
 	   '=                                          d=',
 	   '=                               =============',
 	   '=                                           =',
@@ -174,8 +184,8 @@ function preload(){
 	   '=============================================',],
 
 	  ['=============================================',
-	   '=                              p           d=',
-	   '=                                          d=',
+	   '=h                             p           d=',
+	   '=                                           =',
 	   '=                                           =',
 	   '=                                           =',
 	   '=                                           =',
@@ -197,7 +207,7 @@ function preload(){
 	   '=============================================',],
 
 	  ['=============================================',
-	  '=                                           =',
+	  '=h                                          =',
 	  '=                                           =',
 	  '=                                           =',
 	  '=                                           =',
@@ -215,14 +225,14 @@ function preload(){
 	  '=                                =          =',
 	  '=                                =          =',
 	  '=                                =          =',
-	  '=                                =         d=',
+	  '=                                =          =',
 	  '=                    #           =         d=',
 	  '=============================================',],
 	  
 	  [	'=============================================',
+	    '=h                                          =',
 	    '=                                           =',
 	    '=                                           =',
-	    '=                                          d=',
 	    '=                                          d=',
 		'=                                 ===========',
 		'=                                           =',
@@ -242,7 +252,7 @@ function preload(){
 		'=============================================',],
 
 	   ['=============================================',
-	    '=                 =                         =',
+	    '=h                =                         =',
 	    '=                 =                         =',
 	    '=                 =                         =',
 	    '========          =                        p=',
@@ -259,17 +269,17 @@ function preload(){
 		'=                                           =',
 		'=                                           =',
 		'=                 ===========               =',
-		'=                                          d=',
+		'=                                           =',
 		'=                  g      x                d=',
 		'=============================================',],
 
 		['=============================================',
-	    '=                      =                    =',
+	    '=h                     =                    =',
 	    '=                      =                    =',
 	    '=                      =                    =',
 	    '========               =                    =',
 		'=d     =               =          ===========',
-		'=d     =      ==========                    =',
+		'=      =      ==========                    =',
 		'=      =      =      yp=                    =',
 		'=      =      =        =                    =',
 		'=      =      =        =                    =',
@@ -281,12 +291,12 @@ function preload(){
 		'=                                           =',
 		'=                                           =',
 		'=                 ==========                =',
-		'=                                          d=',
-		'=                  g      x                d=',
+		'=                                           =',
+		'=                  g      x                 =',
 		'=============================================',],
 
 		['==================================================================================================================================',
-	    '=                                                                                                                                 =',
+	    '=h                                                                                                                                =',
 	    '=                                                                                                                                 =',
 	    '=                                                                                                                                 =',
 	    '=                                                                                                                                p=',
@@ -303,7 +313,7 @@ function preload(){
 		'=                                                                                                                                 =',
 		'=                                                                                                                                 =',
 		'=                                                                                                                                 =',
-		'=                                                                                                                                d=',
+		'=                                                                                                                                 =',
 		'=                                                                                                                                d=',
 		'============iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                                                                    ====',
 		'=                                                                                                                                 =',
@@ -318,11 +328,11 @@ function preload(){
 		'===================================================================================================================================',],
 
 		['=============================================',
+	    '=h  =                                       =',
 	    '=   =                                       =',
 	    '=   =                                       =',
 	    '=   =                                       =',
-	    '=   =                                       =',
-		'=   =                                      d=',
+		'=   =                                       =',
 		'= y =                                 s    d=',
 		'=====                                ========',
 		'=                                           =',
@@ -338,7 +348,8 @@ function preload(){
 		'=                                    =      =',
 		'=                                    =      =',
 		'=^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^=',
-		'=============================================',]
+		'=============================================',],
+		[]
 
 ]
 	mapCurrent = new Tiles(a[i],
@@ -441,14 +452,23 @@ box.ani = 'Block'
 
 	music.loop()
 	pressure.image = 'assets/ButtonUp.png'
+	help = loadImage('assets/Help Screen.png')
 }
 
 function draw() {
-
+if(mouse.pressing() && mouse.x >=50 && 
+mouse.x <= 100 &&
+mouse.y <= 100 &&
+mouse.y >= 50){
+	background(help)
+} else if(i<10){
+	background(back)
+} else if(i == 10){
+	background(end)
+}
 	if(pressCount<0){
 		pressCount = 0
 	}
-	background(100);
 
 camera.y = canvas.h / 2
 
@@ -661,13 +681,19 @@ pressure[j].image = buttonRD
 
 	if(pressCount == pressure.length){
 		nxt = true
-	} else {
+	} else if(pressCount != pressure.length){
 
 		if(pressure.length > 0){
 		nxt = false
 		}
-
 	}
+		if(nxt == true){
+			door.image = doorOpen
+			
+		} else if(nxt == false){
+			door.image = doorClose
+			
+		}
 
 	// door pressure
 	for(j=0;j<doorPress.length;j++){
@@ -983,10 +1009,15 @@ if(grav.image == levL){
 		}
 	}
 	//door + restart
-
-	if(player1.overlapping(door) && nxt == true || player2.overlapping(door) && nxt == true || kb.presses('p') || kb.presses('o') || rst == true){
+if(i == 8){
+	textSize(40)
+	stroke('white')
+	fill('light grey')
+	text('C to change camera',500,800)
+}
+	if(player1.overlapping(door) && nxt == true || player2.overlapping(door) && nxt == true || kb.presses('o') || rst == true || kb.presses('p')){
 		
-		if(nxt == true || kb.presses('p')){
+		if( rst != true && nxt == true || kb.presses('p')){
 			i++
 	mapCurrent.removeAll()
 	player1.x = 150
@@ -1053,6 +1084,8 @@ box.x = 600
 box.y = 800
 buttonRU = loadImage('assets/ButtonUp180.png')
 	buttonRD = loadImage('assets/ButtonDown180.png')
+	doorClose = loadImage('assets/DoorPartC.png')
+	doorOpen = loadImage('assets/DoorPartO.png')
 }
 
 if(i == 4){
@@ -1069,6 +1102,8 @@ hinged.x = 2500
 hinged.y = 800
 buttonRU = loadImage('assets/ButtonUp.png')
 	buttonRD = loadImage('assets/ButtonDown.png')
+	doorClose = loadImage('assets/Door1.png')
+	doorOpen = loadImage('assets/DoorOpen.png')
 }
 
 if(i == 5){
@@ -1133,6 +1168,8 @@ if(i==7){
 buttonBU = loadImage('assets/BlueUp180.png')
 buttonRD = loadImage('assets/ButtonDown180.png')
 buttonRU = loadImage('assets/ButtonUp180.png')
+doorClose = loadImage('assets/DoorPartC.png')
+	doorOpen = loadImage('assets/DoorPartO.png')
 }
 if(i == 8){
 	hinges.removeAll()
@@ -1145,16 +1182,17 @@ if(i == 8){
 	signs.image = no
 	signs.scale = 3
 	signs.collider = 'n'
-
 	buttonBD = loadImage('assets/BlueDown.png')
 buttonBU = loadImage('assets/BlueUp.png')
 buttonRD = loadImage('assets/ButtonDown.png')
 buttonRU = loadImage('assets/ButtonUp.png')
+doorClose = loadImage('assets/Door1.png')
+	doorOpen = loadImage('assets/DoorOpen.png')
 }
 if(i==9){
+	noStroke()
 	resizeCanvas(2250,1080,'fullscreen')
 	signs.remove()
-	signs.x=-400
 	hinged = new hinges.Sprite()
 	hinged.w = 250
 	hinged.h = 50
@@ -1171,11 +1209,17 @@ if(i==9){
 	portalo.y = 625
 	player1.y = 700
 }
-
+if(i == 10){
+	hinges.removeAll()
+portali.remove(
+	portalo.remove()
+)
+}
 mapCurrent.layer = 0
 portali.layer = 0
 portalo.layer = 0
 		}
 	
 player1.layer = box.layer +1
+console.log(i)
 	}
