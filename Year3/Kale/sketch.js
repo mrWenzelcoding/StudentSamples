@@ -884,12 +884,12 @@ if(kb.pressed('r') && load == false){
 
 	}
 	//cheats
-	if(kb.pressed('0')){
+	/*if(kb.pressed('0')){
 		d = true
 	}
 	if(kb.pressed('9')){
 		l = true
-	}
+	}*/
 
 }
 
