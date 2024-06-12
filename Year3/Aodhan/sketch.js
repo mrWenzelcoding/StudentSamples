@@ -1,7 +1,7 @@
 
 let player, enemy, bad, numE, spawnE, temp, ground, filler, beam, platformP, platformS, 
 platformF, ladder, essence, essenceNum, reload, board, hearts, heart, heartCurrent, start,
-startMenu, restart, menu, remenu, restartMenu;
+startMenu, restart, menu, remenu, restartMenu, secret, funny, silly;
 
 let noClip, hit, hurt = [], stun, lineE, dead, BOX, run, readyR, reloadT, readyI;
 
@@ -59,6 +59,7 @@ function preload(){
 	endscreen = loadImage('assets/Game Stuff/endscreen.png');
 	menu = loadImage('assets/Game Stuff/StartMenu.png');
 	remenu = loadImage('assets/Game Stuff/restart.png');
+	funny = loadImage('assets/Game Stuff/WIN_20211210_21_07_59_Pro.jpg');
 
 }
 
@@ -72,6 +73,7 @@ function setup() {
 	run = true;
 	start = false;
 	restart = false;
+	silly = false;
 	stun = false;
 	lineE = false;
 	BOX = false;
@@ -295,6 +297,19 @@ function setup() {
 	door.y = -200;
 	door.w = 120
 	door.h = 150;
+
+	//Secret
+
+	secret = new Sprite();
+	secret.collider = 'none'
+	secret.colour = color(0, 0, 0, 0);
+	secret.stroke = color(0, 0, 0, 0);
+	secret.layer = 0;
+	secret.x = -100;
+	secret.y = -100;
+	secret.w = 35;
+	secret.h = 35;
+	secret.tile = 's';
 
 	//EndScreen
 
@@ -604,11 +619,11 @@ function setup() {
 			'||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||',
 			'|||||                                           ||||||||||||',
 			'|||                                                |||||||||',
-			'||              --        ---   ---                       ||',
-			'|                    --                                 @  |',
+			'||              --                                        ||',
+			'|                    --   ---   ---                     @s |',
 			'|                                   -----         =========|',
 			'                 --                         --   =||||||||||',
-			'                                 --                ||||||||||',
+			'                                                   ||||||||||',
 			'              --                                   |||||||||',
 			'=====              --     @                          |||||||',
 			'|||||===   --          ======                            |||',
@@ -734,9 +749,13 @@ function draw() {
 	}
 
 	if(start == true){
-	background(bk1); 
-	background(bk2);
-	background(bk3);
+		if(silly == true){
+			background(funny);
+		} else {
+			background(bk1); 
+			background(bk2);
+			background(bk3);
+		}
 
 	startMenu.x = -1000;
 	startMenu.y = -1000;
@@ -1417,7 +1436,11 @@ if(mapSelect == 0){
 	//Boss
 
 	if(bossFight == true){
-	background(bossBody);
+		if(silly == true){
+			background(funny);
+		} else {
+			background(bossBody);
+		}
 
 	
 
@@ -1643,9 +1666,13 @@ if(mapSelect == 0){
 		barrier1.remove();
 		barrier2.remove();
 		resizeCanvas(900, 600);
-		background(bk1)
-		background(bk2)
-		background(bk3)
+		if(silly == true){
+			background(funny);
+		} else {
+			background(bk1); 
+			background(bk2);
+			background(bk3);
+		}
 		
 		bridgeTimer ++;
 		
@@ -1846,6 +1873,10 @@ if(mapSelect == 0){
 	if(dead == true){
 		if(kb.presses('enter')){
 		}
+	}
+
+	if(player.overlaps(secret)){
+		silly = true;
 	}
 
 }
