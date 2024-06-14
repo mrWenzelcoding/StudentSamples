@@ -1,46 +1,40 @@
 let img;
-let x = [];
-let y = [];
-let bs = [];
-let col = [];
-let bss = [];
-let causticSpred = false
-function preload() {
-  img = loadImage("assets/mountain.jpg");
+let img2;
+let canvas2
+let x=[]
+let y=[]
+let size;
+function preload(){
+ // img=loadImage("bear.jpg")
+  img2=loadImage('assets/banksy.jpg')
 }
+
+
 function setup() {
-  createCanvas(500,500);
-  noStroke();
-  if(causticSpred == false){
-    image(img, 0, 0, 500, 500); 
+  createCanvas(img2.width,img2.height);
+  image(img2,0,0,img2.width,img2.height)
+  loadPixels()
+  
+  for(i=0;i<6000; i++){
+    x[i]=int(random(width))
+    y[i]=int(random(height))
   }
-  if(causticSpred == true){
-  image(img, 0, 0);
-  }
-  for (let i = 0; i < 2000; i++) {
-    bs[i] = 2;
-    if(causticSpred == false){
-    bss[i] = 0.2;
-    }
-    if(causticSpred == true){
-      bss[i] = 0.1
-    }
-  }
+  size=5
+ 
+
 }
 
 function draw() {
-  for (let i = 0; i < 2000; i++) {
-    x[i] = random(width);
-    y[i] = random(height);
-    col[i] = get(x[i], y[i]);
-    fill(col[i]);
-    ellipse(x[i], y[i], bs[i]);
-    bs[i] += bss[i];
-    if (bs[i] > 15) {
-      bss[i] *= -1;
-    }
-    if (bs[i] < 2) {
-      noLoop();
-    }
+  for(i=0; i<6000;i++){
+    noStroke()
+  c=get(x[i],y[i])
+    fill(c)
+  //erase(c)
+  rect(x[i],y[i],size,size)
+    y[i]++
+    x[i]++
+    //noErase()
   }
+ 
+  //updatePixels()
 }
