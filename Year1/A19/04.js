@@ -23,7 +23,7 @@ function preload(){
 
 function setup() {
 
-  createCanvas(windowWidth,windowWidth);
+  createCanvas(windowHeight,windowHeight);
 
   noStroke()
 
