@@ -675,7 +675,7 @@ class Player {
         this.guy.ani.offset.x=10
         this.guy.addAni('ralphheavyprojectile','assets/kralphwheel.png',{frameSize:[37,37],frames:11,frameDelay:4})
         this.guy.addAni('ralphdown','assets/kralphstab.png',{frameSize:[37,37],frames:7,frameDelay:5})
-        this.guy.addAni('ralphidle','assets/kralphIdle.png',{frameSize: [26,37], frames: 2, frameDelay:30})
+        this.guy.addAni('ralphidle','assets/kralphidle.png',{frameSize: [26,37], frames: 2, frameDelay:30})
         
       
        
