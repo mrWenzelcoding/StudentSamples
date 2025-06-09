@@ -28,9 +28,11 @@ let lightProjectileCooldown
 let heavyProjectileCooldown
 let e
 let mapI
+let testAni
 
 function preload(){
    e=loadAnimation('ralphidle','assets/kralphidle.png',{frameSize:[256,256],frames:2,frameDelay:30})
+   testAni = loadImage("'assets/stock.png'")
 }
 class Maps{
     constructor(maps_){
@@ -655,7 +657,7 @@ class Player {
         this.healthBar.textSize=130
         this.healthBar.collider="n"
         this.Stock = new Sprite(850+2420*player_,windowHeight-620,0,0)
-        this.Stock.addAni('test','assets/stock.png',{frameSize: [128,128], frames: 4, frameDelay:0})
+        this.Stock.addAni('test',testAni,{frameSize: [128,128], frames: 4, frameDelay:0})
         this.Stock.anis.offset.y = 100
         this.Stock.frames=1
         this.Stock.scale=5
