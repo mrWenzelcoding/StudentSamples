@@ -32,7 +32,7 @@ let testAni
 
 function preload(){
    e=loadAnimation('ralphidle','assets/kralphidle.png',{frameSize:[256,256],frames:2,frameDelay:30})
-   testAni = loadImage("'assets/stock.png'")
+   testAni = loadImage("assets/stock.png")
 }
 class Maps{
     constructor(maps_){
