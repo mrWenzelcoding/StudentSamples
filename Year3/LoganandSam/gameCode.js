@@ -7,8 +7,8 @@ let Clicky
 let playershow
 let characterSelect
 let start
-let orbchance
-let orb
+//let orbchance
+//let orb
 //maps and character limits
 let character = []
 let maps=[]
@@ -28,11 +28,9 @@ let lightProjectileCooldown
 let heavyProjectileCooldown
 let e
 let mapI
-let testAni
 
 function preload(){
    e=loadAnimation('ralphidle','assets/kralphidle.png',{frameSize:[256,256],frames:2,frameDelay:30})
-   testAni = loadImage("assets/stock.png")
 }
 class Maps{
     constructor(maps_){
@@ -51,11 +49,14 @@ class Maps{
                     mapI.image=maps.map[i].image
                     mapI.scale=maps.map[i].scale
                     mapI.offset.y=149
+                    
                     floor.color= color(0,0,0,0)
                     floor.stroke= color(0,0,0,0)
                 }else{
     
                 }
+                mapI.color=color(0,0,0,255)
+                mapI.stroke=color(0,0,0,255)
             }
         }
     }
@@ -264,7 +265,7 @@ class Controller {
 
 function setup() {
 mapI=new Sprite(windowWidth/15,windowHeight/15)
-mapI.debug=true
+//mapI.debug=true
 mapI.collider="n"
     if(getItem('lC') != undefined){
         lightCooldown = getItem('lC')
@@ -287,7 +288,7 @@ mapI.collider="n"
 
 
     anisetup=0
-orbchance=0
+//orbchance=0
 camera.zoom=3
 camera.x=windowWidth/2
 camera.y=windowHeight/2
@@ -300,16 +301,17 @@ camera.y=windowHeight/2
       //players[i].guy.addAni('Idle', 'assets/kralphIdle.png', 2)
     
     }
-orb=new Sprite(0,0,50)
-orb.collider="n"
-orb.image='assets/orb.png'
-orb.image.scale=2
-orb.Xoff=random(0,windowWidth)
-orb.Yoff=random(0,windowHeight)
-orb.health=100
+//orb=new Sprite(0,0,50)
+// orb.collider="n"
+// orb.image='assets/orb.png'
+// orb.image.scale=2
+// orb.Xoff=random(0,windowWidth)
+// orb.Yoff=random(0,windowHeight)
+// orb.health=100
     characterSelect = 0
     start = false
-    new Canvas(windowWidth, windowHeight);
+    new Canvas(windowWidth, windowHeight,'fullscreen');
+
     textSize(20)
     Clicky = new Sprite(windowWidth/2, windowHeight/2, 900, 900)
     Clicky.collider = 'n'
@@ -379,13 +381,11 @@ character[i].textSize=40
 function draw() {
     background(0)  
     textFont('Orbitron')
-   if(mouse.pressed()){
-    orb.debug=true
-   }
+   
    let alivePlayers = 0;
    let lastAlivePlayer = null;
 text(" ",-10,10)
-   orbchance=round(random(0,10000))
+   
     if (maps.mapsellect == true) {
         maps.display()
         rect(950, 250, 900, 900)
@@ -480,15 +480,15 @@ text(" ",-10,10)
              camera.zoom = 2
          }
 //apple orb code
-// if(orbchance==20 && orbchance.length<1){
-orb.y=map(noise(orb.Yoff)*windowHeight,0,windowHeight,-1000,windowHeight/6)
-orb.x=map(noise(orb.Xoff)*windowWidth,0,windowWidth,windowWidth/990,windowWidth/3.5)
-orb.Xoff+=0.01
-orb.Yoff+=0.01
-orb.hit-=1         
+// // if(orbchance==20 && orbchance.length<1){
+// orb.y=map(noise(orb.Yoff)*windowHeight,0,windowHeight,-1000,windowHeight/6)
+// orb.x=map(noise(orb.Xoff)*windowWidth,0,windowWidth,windowWidth/990,windowWidth/3.5)
+// orb.Xoff+=0.01
+// orb.Yoff+=0.01
+// orb.hit-=1         
 //all player code
         for(let i = 0;i<players.length;i++){
-            players[i].guy.debug=true
+            //players[i].guy.debug=true
             players[i].move()
             players[i].reset()
             players[i].gamepad.update()
@@ -513,7 +513,7 @@ orb.hit-=1
             if(players[i].lives==0){
                 //add death idle
             }          
-            orb.hit=0
+           // orb.hit=0
             //make code able to jump on peoples heads and collisions 
             for(let w=0;w<hazard.length;w++){
                 
@@ -556,13 +556,13 @@ orb.hit-=1
                          //   }
                             break
                         }
-                        if(players[i].hurtbox[k].collider.overlapping(orb)&&orb.hit<0){
-                            orb.health-=10
-                            players[i].hurtbox[k].collider.remove()
-                            players[i].hurtbox.splice(k,1);
-                            orb.hit=20                            
-                            break
-                        }
+                        // if(players[i].hurtbox[k].collider.overlapping(orb)&&orb.hit<0){
+                        //     orb.health-=10
+                        //     players[i].hurtbox[k].collider.remove()
+                        //     players[i].hurtbox.splice(k,1);
+                        //     orb.hit=20                            
+                        //     break
+                        // }
                     }
                 }
                 if(j>=i){
@@ -586,21 +586,21 @@ orb.hit-=1
                           //  }
                             break
                         }
-                        if(players[i].hurtbox[k].collider.overlapping(orb)&&orb.hit<0){
-                            orb.health-=10
-                            players[i].hurtbox[k].collider.remove()
-                            players[i].hurtbox.splice(k,1);
-                            orb.hit=20
-                            break
-                        }
+                        // if(players[i].hurtbox[k].collider.overlapping(orb)&&orb.hit<0){
+                        //     orb.health-=10
+                        //     players[i].hurtbox[k].collider.remove()
+                        //     players[i].hurtbox.splice(k,1);
+                        //     orb.hit=20
+                        //     break
+                        // }
                     }
                 }
             }
             players[i].guy.rotationLock = true
-            if(orb.health<=0){
-                orb.life=0
-                players[i].special=true
-            }
+            // if(orb.health<=0){
+            //     orb.life=0
+            //     players[i].special=true
+            // }
             }
         }
         //animation set up
@@ -640,6 +640,10 @@ class Player {
         this.floor = new Sprite(this.x + 20, this.y, this.w, this.h - 30)
         this.roof = new Sprite(this.x, this.y, this.w + 5, this.h - 45)
         this.guy = new Sprite(this.x, this.y, this.w, this.h)
+        this.floor.color=color(1,1,1,0)
+        this.roof.color=color(0,0,0,0)
+        this.floor.stroke=color(0,0,0,0)
+        this.roof.stroke=color(0,0,0,0)
         this.flip = 1
         this.guy.vel.x=0
         this.speedy=0
@@ -647,7 +651,7 @@ class Player {
 		this.gamepad = new Controller(player_)
         this.health=0
         this.lives = 3
-        this.jumpInit = 2
+        this.jumpInit = 1
         this.jump = this.jumpInit
         this.air = true
         this.healthBar=new Sprite(250+2420*player_,windowHeight-150,500,250)
@@ -657,7 +661,7 @@ class Player {
         this.healthBar.textSize=130
         this.healthBar.collider="n"
         this.Stock = new Sprite(850+2420*player_,windowHeight-620,0,0)
-        this.Stock.addAni('test',testAni,{frameSize: [128,128], frames: 4, frameDelay:0})
+        this.Stock.addAni('test','assets/stock.png',{frameSize: [128,128], frames: 4, frameDelay:0})
         this.Stock.anis.offset.y = 100
         this.Stock.frames=1
         this.Stock.scale=5
@@ -677,7 +681,7 @@ class Player {
         this.guy.ani.offset.x=10
         this.guy.addAni('ralphheavyprojectile','assets/kralphwheel.png',{frameSize:[37,37],frames:11,frameDelay:4})
         this.guy.addAni('ralphdown','assets/kralphstab.png',{frameSize:[37,37],frames:7,frameDelay:5})
-        this.guy.addAni('ralphidle','assets/kralphidle.png',{frameSize: [26,37], frames: 2, frameDelay:30})
+        this.guy.addAni('ralphidle','assets/kralphIdle.png',{frameSize: [26,37], frames: 2, frameDelay:30})
         
       
        
