@@ -109,7 +109,7 @@ function setup() {
      
      grenades.image=grenadeimg
      grenades.scale=4
-     grenades.debug=true
+     //grenades.debug=true
 //med kit
      medkit = new Group();
      medkit.w=5
@@ -140,7 +140,7 @@ function setup() {
     gun.image = pistol;
     gun.image.scale = 6;
     gun.selection = 0;
-    gun.debug=true
+    //gun.debug=true
     gun.selectionTimer=0
     gun.selectionMaxTime=10
     // Map layout (array of strings)
@@ -451,7 +451,7 @@ function draw() {
     // Enable debugging for gun and bond
     //gun.debug = true;
     gun.collider = "k";
-    bond.debug = true;
+    //bond.debug = true;
 
     // Clear background
     background(50);
